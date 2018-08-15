@@ -8,8 +8,17 @@ import Post from './posts/Post';
 import Posts from './posts/Posts';
 import NewPost from './posts/NewPost';
 
+
+const defaultState = {
+  isEditMode: false
+}
+
 const client = new ApolloClient({
-  uri: "https://api-euwest.graphcms.com/v1/cjku2ljfm09wq01ahmofb4fq6/master"
+  uri: "https://api-euwest.graphcms.com/v1/cjku2ljfm09wq01ahmofb4fq6/master",
+  clientState: {
+    defaults: defaultState,
+    resolvers: {}
+  }
 });
 
 
@@ -22,15 +31,17 @@ class App extends Component {
         <Router>
           <div className="App">
             <header className="App-header">
-              <img src={logo} className="App-logo" alt="logo" />
-              <h1 className="App-title">Welcome to React</h1>
+            <Link to={'/'}>
+              <h1 className="App-title">Home</h1>
+            </Link>
             </header>
-            <Link to={'/post/new'}>New Post</Link>
-            <Switch>
-              <Route exact path="/" component={Posts} />
-              <Route exact path="/post/new" component={NewPost} />
-              <Route path="/post/:id" component={Post} />
-            </Switch>
+            <main>
+              <Switch>
+                <Route exact path="/" component={Posts} />
+                <Route exact path="/post/new" component={NewPost} />
+                <Route path="/post/:id" component={Post} />
+              </Switch>
+            </main>
           </div>
         </Router>
       </ApolloProvider>

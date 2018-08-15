@@ -17,7 +17,8 @@ class Posts extends Component {
   render() {
     return (
       <div>
-        <ul>
+        <Link className="button" to={'/post/new'}>New Post</Link>
+        <ul className="posts-listing">
           <Query query={POSTS_QUERY}>
             {({ loading, data }) => {
               if (loading) return <p>Loading data...</p>;

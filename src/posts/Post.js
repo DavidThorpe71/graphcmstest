@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import { Query } from "react-apollo";
 import gql from "graphql-tag";
+import UpdatePost from './UpdatePost';
 
 const POST_QUERY = gql`
 query post($id: ID!){
@@ -9,6 +10,7 @@ query post($id: ID!){
     title
     body
   }
+  isEditMode @client
 }
 `;
 
@@ -23,11 +25,19 @@ class Post extends Component {
       >
         {({ data, loading }) => {
           if (loading) return <p>Loading page...</p>
-          const { post } = data;
+          const { post, isEditMode } = data;
           return (
             <Fragment>
-              <h1>{post.title}</h1>
-              <p>{post.body}</p>
+              {isEditMode ? (
+              <section>
+                <h1>Edit Post</h1>
+                <UpdatePost post={post} />
+              </section>
+            ): (
+              <section>
+                <h1>{post.title}</h1>
+              </section>
+            )}
             </Fragment>
           )
         }}

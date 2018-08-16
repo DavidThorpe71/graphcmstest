@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import ApolloClient from 'apollo-boost';
 import { ApolloProvider } from "react-apollo";
 import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
-import logo from './logo.svg';
 import './App.css';
 import Post from './posts/Post';
 import Posts from './posts/Posts';
@@ -31,9 +30,9 @@ class App extends Component {
         <Router>
           <div className="App">
             <header className="App-header">
-            <Link to={'/'}>
-              <h1 className="App-title">Home</h1>
-            </Link>
+              <Link to={'/'}>
+                <h1 className="App-title">Home</h1>
+              </Link>
             </header>
             <main>
               <Switch>

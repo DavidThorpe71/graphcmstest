@@ -2,19 +2,21 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 class PostForm extends Component {
-  
+
   static propTypes = {
     onSubmit: PropTypes.func.isRequired,
+    onSuccess: PropTypes.func,
     post: PropTypes.object
   }
 
   static defaultProps = {
-    post: {}
+    post: {},
+    onSuccess: () => null
   }
-  
+
   state = {
     title: this.props.post.title || "",
-    body: this.props.post.body|| "",
+    body: this.props.post.body || "",
     id: this.props.post.id || ""
   }
 
@@ -27,7 +29,7 @@ class PostForm extends Component {
   }
 
   render() {
-    const { onSubmit } = this.props;
+    const { onSubmit, onSuccess } = this.props;
     const { title, body, id } = this.state;
     return (
       <form onSubmit={e => {
@@ -39,10 +41,7 @@ class PostForm extends Component {
             id
           }
         }).then(() => {
-          this.setState({
-            title: "",
-            body: ""
-          })
+          onSuccess()
         }).catch((err) => {
           console.log(err)
         })
